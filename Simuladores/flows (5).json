@@ -1,0 +1,2619 @@
+[
+    {
+        "id": "131009e1bd1f3ca1",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "27c71f246b12e647",
+        "type": "ui_led",
+        "z": "131009e1bd1f3ca1",
+        "order": 2,
+        "group": "a25abce14e56bfbb",
+        "width": 0,
+        "height": 0,
+        "label": "Medidor principal",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "lab1.stop",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "lab1.start",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "Medidor principal",
+        "x": 1670,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "93434495c1447f87",
+        "type": "ui_switch",
+        "z": "131009e1bd1f3ca1",
+        "name": "Switch principal",
+        "label": "Medidor principal",
+        "tooltip": "Encender/apagar",
+        "group": "a25abce14e56bfbb",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "control",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "lab1.start",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "lab1.stop",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 540,
+        "y": 40,
+        "wires": [
+            [
+                "a327df18d1624eb0",
+                "27c71f246b12e647",
+                "b26051da65398d81",
+                "904bc44cd1bb8612"
+            ]
+        ]
+    },
+    {
+        "id": "5c8d6163facbcd04",
+        "type": "mqtt in",
+        "z": "131009e1bd1f3ca1",
+        "name": "",
+        "topic": "control",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "5f72618dfadbe864",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 50,
+        "y": 480,
+        "wires": [
+            [
+                "ed9e39096b14bfb2",
+                "548c34ddc5dcc85e"
+            ]
+        ]
+    },
+    {
+        "id": "60a6b6dd93e7295f",
+        "type": "mqtt out",
+        "z": "131009e1bd1f3ca1",
+        "name": "",
+        "topic": "lab1",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "5f72618dfadbe864",
+        "x": 2290,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "cea2c59d5739666a",
+        "type": "mqtt out",
+        "z": "131009e1bd1f3ca1",
+        "name": "",
+        "topic": "lab2",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b9d0191559070694",
+        "x": 2270,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "e7f25e5e5f1c2cee",
+        "type": "mqtt out",
+        "z": "131009e1bd1f3ca1",
+        "name": "",
+        "topic": "lab4",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "8ff3fbfa8bb84081",
+        "x": 2330,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "c5350ed29fe3e663",
+        "type": "power-monitor",
+        "z": "131009e1bd1f3ca1",
+        "name": "Medidor principal",
+        "startthreshold": 0,
+        "stopthreshold": "-1",
+        "startafter": 1,
+        "stopafter": 1,
+        "energydecimals": 4,
+        "emitidle": false,
+        "x": 2070,
+        "y": 300,
+        "wires": [
+            [
+                "60a6b6dd93e7295f"
+            ]
+        ]
+    },
+    {
+        "id": "b26051da65398d81",
+        "type": "event",
+        "z": "131009e1bd1f3ca1",
+        "name": "Computadoras",
+        "controlTopic": "control",
+        "startCmd": "lab1.start",
+        "stopCmd": "lab1.stop",
+        "distribution": "uniform",
+        "expMeanInterval": 1,
+        "minInterval": "5",
+        "maxInterval": "10",
+        "gaussMeanInterval": 1,
+        "stdDev": 1,
+        "outputTopic": "medicion",
+        "outputPayload": "",
+        "outputPayloadType": "date",
+        "maxEventCount": 0,
+        "x": 1660,
+        "y": 160,
+        "wires": [
+            [
+                "e42783ebb43354ba"
+            ]
+        ]
+    },
+    {
+        "id": "afe651d86c47a80c",
+        "type": "event",
+        "z": "131009e1bd1f3ca1",
+        "name": "Foco 1",
+        "controlTopic": "control",
+        "startCmd": "lab1.foco1.start",
+        "stopCmd": "lab1.foco1.stop",
+        "distribution": "uniform",
+        "expMeanInterval": 1,
+        "minInterval": "5",
+        "maxInterval": "10",
+        "gaussMeanInterval": 1,
+        "stdDev": 1,
+        "outputTopic": "event",
+        "outputPayload": "",
+        "outputPayloadType": "date",
+        "maxEventCount": 0,
+        "x": 1630,
+        "y": 260,
+        "wires": [
+            [
+                "0870416378269e15"
+            ]
+        ]
+    },
+    {
+        "id": "484e6f11cbdd8d53",
+        "type": "event",
+        "z": "131009e1bd1f3ca1",
+        "name": "Foco 2",
+        "controlTopic": "control",
+        "startCmd": "lab1.foco2.start",
+        "stopCmd": "lab1.foco2.stop",
+        "distribution": "uniform",
+        "expMeanInterval": 1,
+        "minInterval": "5",
+        "maxInterval": "10",
+        "gaussMeanInterval": 1,
+        "stdDev": 1,
+        "outputTopic": "event",
+        "outputPayload": "",
+        "outputPayloadType": "date",
+        "maxEventCount": 0,
+        "x": 1630,
+        "y": 360,
+        "wires": [
+            [
+                "a59dbbbf10c6fe4b"
+            ]
+        ]
+    },
+    {
+        "id": "5923dff6293bece0",
+        "type": "event",
+        "z": "131009e1bd1f3ca1",
+        "name": "Ventilador",
+        "controlTopic": "control",
+        "startCmd": "lab1.ventilador.start",
+        "stopCmd": "lab1.ventilador.stop",
+        "distribution": "uniform",
+        "expMeanInterval": 1,
+        "minInterval": "5",
+        "maxInterval": "10",
+        "gaussMeanInterval": 1,
+        "stdDev": 1,
+        "outputTopic": "event",
+        "outputPayload": "",
+        "outputPayloadType": "date",
+        "maxEventCount": 0,
+        "x": 1640,
+        "y": 460,
+        "wires": [
+            [
+                "09da18e6aaefecd4"
+            ]
+        ]
+    },
+    {
+        "id": "0870416378269e15",
+        "type": "random",
+        "z": "131009e1bd1f3ca1",
+        "name": "Foco 1",
+        "low": 1,
+        "high": 10,
+        "inte": "true",
+        "property": "payload",
+        "x": 1790,
+        "y": 260,
+        "wires": [
+            [
+                "c5350ed29fe3e663"
+            ]
+        ]
+    },
+    {
+        "id": "a59dbbbf10c6fe4b",
+        "type": "random",
+        "z": "131009e1bd1f3ca1",
+        "name": "Foco 2",
+        "low": 1,
+        "high": 10,
+        "inte": "true",
+        "property": "payload",
+        "x": 1790,
+        "y": 360,
+        "wires": [
+            [
+                "c5350ed29fe3e663"
+            ]
+        ]
+    },
+    {
+        "id": "09da18e6aaefecd4",
+        "type": "random",
+        "z": "131009e1bd1f3ca1",
+        "name": "Ventilador",
+        "low": 1,
+        "high": "50",
+        "inte": "true",
+        "property": "payload",
+        "x": 1800,
+        "y": 460,
+        "wires": [
+            [
+                "c5350ed29fe3e663"
+            ]
+        ]
+    },
+    {
+        "id": "e42783ebb43354ba",
+        "type": "function",
+        "z": "131009e1bd1f3ca1",
+        "name": "Computadoras",
+        "func": "let mensaje = msg.payload;\nlet today = new Date();\nlet diffMin = 0;\nlet diffTime = 0;\nif (!context.get(\"ultimoReset\")) {\n    context.set(\"ultimoReset\", today);\n\n} else {\n    diffTime = Math.abs(today.getTime() - context.get(\"ultimoReset\").getTime());\n    diffMin = Math.ceil(diffTime / (1000 * 60));\n    if (diffMin >= 60) {\n        msg['payload'] = 'stop';\n        msg['reset'] = 'diffMin' + diffMin;\n        node.send(msg);\n        context.set(\"ultimoReset\", today);\n        node.status({ fill: 'yellow', shape: 'ring', text:'diffMin: ' + diffMin });\n    } else {\n        if (today.getHours() != context.get(\"ultimo\").getHours()) {\n            msg['payload'] = 'stop';\n            msg['reset'] = 'dif: ' + today.getHours() + \" \" + context.get(\"ultimo\").getHours();\n            node.send(msg);\n            context.set(\"ultimoReset\", today);\n            node.status({ fill: 'yellow', shape: 'ring', text: 'dif: ' + today.getHours() + \" \" + context.get(\"ultimo\").getHours()});\n        }\n    }\n}\ncontext.set(\"ultimo\", today);\n\nif (flow.get('lab1.estado') == 'Encendido') {\n    context.set('computadorasActivas', getRandomInt(context.get('computadorasTotales')));\n    msg['activas'] = context.get('computadorasActivas');\n    msg['payload'] = context.get('computadorasActivas') * getRandomInt(200) * 5;\n    node.send(msg);\n} else {\n    context.set('computadorasActivas', 0);\n    msg['activas'] = context.get('computadorasActivas');\n    //msg['payload'] = 'stop';\n    node.send(msg);\n}\n\nfunction getRandomInt(max) {\n    return Math.floor(Math.random() * max);\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('computadorasActivas', 2);\ncontext.set('computadorasTotales', 15);\ncontext.set('estado', 'Apagado');",
+        "finalize": "// Code added here will be run when the\n// node is being stopped or re-deployed.\ncontext.set('computadorasActivas', 0);",
+        "libs": [],
+        "x": 1900,
+        "y": 160,
+        "wires": [
+            [
+                "c5350ed29fe3e663",
+                "80257a0eaeb7cda6"
+            ]
+        ]
+    },
+    {
+        "id": "5e22f0bdbb9e498e",
+        "type": "switch",
+        "z": "131009e1bd1f3ca1",
+        "name": "Switch de control",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "lab1.st",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "lab1.foco1",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "lab1.foco2",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "lab1.ventilador",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 4,
+        "x": 470,
+        "y": 360,
+        "wires": [
+            [
+                "93434495c1447f87"
+            ],
+            [
+                "f2a336a0066d1410"
+            ],
+            [
+                "d3f73ecccaaa4933"
+            ],
+            [
+                "859772d517ef0285"
+            ]
+        ]
+    },
+    {
+        "id": "f2a336a0066d1410",
+        "type": "ui_switch",
+        "z": "131009e1bd1f3ca1",
+        "name": "Foco 1",
+        "label": "Foco 1",
+        "tooltip": "",
+        "group": "a25abce14e56bfbb",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "control",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "lab1.foco1.start",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "lab1.foco1.stop",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 1150,
+        "y": 240,
+        "wires": [
+            [
+                "8ddadb58d1d38797"
+            ]
+        ]
+    },
+    {
+        "id": "ebb687b991d03c28",
+        "type": "ui_led",
+        "z": "131009e1bd1f3ca1",
+        "order": 4,
+        "group": "a25abce14e56bfbb",
+        "width": 0,
+        "height": 0,
+        "label": "Foco 1",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "lab1.foco1.stop",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "lab1.foco1.start",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "Foco 1",
+        "x": 1630,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "d3f73ecccaaa4933",
+        "type": "ui_switch",
+        "z": "131009e1bd1f3ca1",
+        "name": "Foco 2",
+        "label": "Foco 2",
+        "tooltip": "",
+        "group": "a25abce14e56bfbb",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "control",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "lab1.foco2.start",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "lab1.foco2.stop",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 1150,
+        "y": 320,
+        "wires": [
+            [
+                "3cedd28bc9178f16"
+            ]
+        ]
+    },
+    {
+        "id": "859772d517ef0285",
+        "type": "ui_switch",
+        "z": "131009e1bd1f3ca1",
+        "name": "Ventilador",
+        "label": "Ventilador",
+        "tooltip": "",
+        "group": "a25abce14e56bfbb",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "control",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "lab1.ventilador.start",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "lab1.ventilador.stop",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 1160,
+        "y": 420,
+        "wires": [
+            [
+                "b1c26b04aba0ecd4"
+            ]
+        ]
+    },
+    {
+        "id": "78a3389cf3de11af",
+        "type": "ui_led",
+        "z": "131009e1bd1f3ca1",
+        "order": 6,
+        "group": "a25abce14e56bfbb",
+        "width": 0,
+        "height": 0,
+        "label": "Foco 2",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "lab1.foco2.stop",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "lab1.foco2.start",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "Foco 2",
+        "x": 1630,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "287fb66e2914df4a",
+        "type": "ui_led",
+        "z": "131009e1bd1f3ca1",
+        "order": 8,
+        "group": "a25abce14e56bfbb",
+        "width": 0,
+        "height": 0,
+        "label": "Ventilador",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "lab1.ventilador.stop",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "lab1.ventilador.start",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "Ventilador",
+        "x": 1640,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "ed9e39096b14bfb2",
+        "type": "switch",
+        "z": "131009e1bd1f3ca1",
+        "name": "Mensajero",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "lab1",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "lab2",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "lab4",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 3,
+        "x": 230,
+        "y": 480,
+        "wires": [
+            [
+                "5e22f0bdbb9e498e"
+            ],
+            [
+                "7dc6eefa6613d202"
+            ],
+            [
+                "f3132bdaa9ef3ec0"
+            ]
+        ]
+    },
+    {
+        "id": "80257a0eaeb7cda6",
+        "type": "ui_gauge",
+        "z": "131009e1bd1f3ca1",
+        "name": "Computadoras activas",
+        "group": "a25abce14e56bfbb",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Computadoras activas",
+        "label": "Computadoras",
+        "format": "{{msg.activas}}",
+        "min": 0,
+        "max": "15",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 2160,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "395d9cff88803118",
+        "type": "change",
+        "z": "131009e1bd1f3ca1",
+        "name": "Encender",
+        "rules": [
+            {
+                "t": "set",
+                "p": "lab1.estado",
+                "pt": "flow",
+                "to": "Encendido",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8ddadb58d1d38797",
+        "type": "function",
+        "z": "131009e1bd1f3ca1",
+        "name": "Comprobación",
+        "func": "if (flow.get('lab1.estado') == 'Encendido' || msg.payload.includes('stop')) {\n    node.send(msg);\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1360,
+        "y": 240,
+        "wires": [
+            [
+                "ebb687b991d03c28",
+                "afe651d86c47a80c",
+                "904bc44cd1bb8612"
+            ]
+        ]
+    },
+    {
+        "id": "a327df18d1624eb0",
+        "type": "switch",
+        "z": "131009e1bd1f3ca1",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "lab1.start",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "lab1.stop",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 590,
+        "y": 140,
+        "wires": [
+            [
+                "395d9cff88803118"
+            ],
+            [
+                "5c210205d66fd8ce",
+                "e42783ebb43354ba"
+            ]
+        ]
+    },
+    {
+        "id": "5c210205d66fd8ce",
+        "type": "change",
+        "z": "131009e1bd1f3ca1",
+        "name": "Apagar",
+        "rules": [
+            {
+                "t": "set",
+                "p": "lab1.estado",
+                "pt": "flow",
+                "to": "Apagado",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 160,
+        "wires": [
+            [
+                "cde6090cd0e63228",
+                "c965ea11da37e030",
+                "8cccc0cc825450c0"
+            ]
+        ]
+    },
+    {
+        "id": "3cedd28bc9178f16",
+        "type": "function",
+        "z": "131009e1bd1f3ca1",
+        "name": "Comprobación",
+        "func": "if (flow.get('lab1.estado') == 'Encendido' || msg.payload.includes('stop')) {\n    node.send(msg);\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1360,
+        "y": 320,
+        "wires": [
+            [
+                "78a3389cf3de11af",
+                "484e6f11cbdd8d53",
+                "904bc44cd1bb8612"
+            ]
+        ]
+    },
+    {
+        "id": "b1c26b04aba0ecd4",
+        "type": "function",
+        "z": "131009e1bd1f3ca1",
+        "name": "Comprobación",
+        "func": "if (flow.get('lab1.estado') == 'Encendido' || msg.payload.includes('stop')) {\n    node.send(msg);\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1360,
+        "y": 420,
+        "wires": [
+            [
+                "287fb66e2914df4a",
+                "5923dff6293bece0",
+                "904bc44cd1bb8612"
+            ]
+        ]
+    },
+    {
+        "id": "904bc44cd1bb8612",
+        "type": "mqtt out",
+        "z": "131009e1bd1f3ca1",
+        "name": "",
+        "topic": "lab.control",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "5f72618dfadbe864",
+        "x": 1650,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "cde6090cd0e63228",
+        "type": "change",
+        "z": "131009e1bd1f3ca1",
+        "name": "Apagar foco 1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "lab1.foco1.stop",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 980,
+        "y": 220,
+        "wires": [
+            [
+                "f2a336a0066d1410"
+            ]
+        ]
+    },
+    {
+        "id": "c965ea11da37e030",
+        "type": "change",
+        "z": "131009e1bd1f3ca1",
+        "name": "Apagar foco 2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "lab1.foco2.stop",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 980,
+        "y": 300,
+        "wires": [
+            [
+                "d3f73ecccaaa4933"
+            ]
+        ]
+    },
+    {
+        "id": "8cccc0cc825450c0",
+        "type": "change",
+        "z": "131009e1bd1f3ca1",
+        "name": "Apagar ventilador",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "lab1.ventilador.stop",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 990,
+        "y": 380,
+        "wires": [
+            [
+                "859772d517ef0285"
+            ]
+        ]
+    },
+    {
+        "id": "75d1f2a2ad304f72",
+        "type": "ui_led",
+        "z": "131009e1bd1f3ca1",
+        "order": 2,
+        "group": "97dc03174c7316bc",
+        "width": 0,
+        "height": 0,
+        "label": "Medidor principal",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "lab2.stop",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "lab2.start",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "Medidor principal",
+        "x": 1630,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "81be9258a5cd4341",
+        "type": "ui_switch",
+        "z": "131009e1bd1f3ca1",
+        "name": "Switch principal",
+        "label": "Medidor principal",
+        "tooltip": "Encender/apagar",
+        "group": "97dc03174c7316bc",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "control",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "lab2.start",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "lab2.stop",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 500,
+        "y": 560,
+        "wires": [
+            [
+                "133c647f083e81d0",
+                "75d1f2a2ad304f72",
+                "3b87d4d6c9858a45",
+                "1b5042b9fd176fe6"
+            ]
+        ]
+    },
+    {
+        "id": "65a1c20518dacb8b",
+        "type": "power-monitor",
+        "z": "131009e1bd1f3ca1",
+        "name": "Medidor principal",
+        "startthreshold": 0,
+        "stopthreshold": "-1",
+        "startafter": 1,
+        "stopafter": 1,
+        "energydecimals": 4,
+        "emitidle": false,
+        "x": 2030,
+        "y": 820,
+        "wires": [
+            [
+                "cea2c59d5739666a"
+            ]
+        ]
+    },
+    {
+        "id": "3b87d4d6c9858a45",
+        "type": "event",
+        "z": "131009e1bd1f3ca1",
+        "name": "Computadoras",
+        "controlTopic": "control",
+        "startCmd": "lab2.start",
+        "stopCmd": "lab2.stop",
+        "distribution": "uniform",
+        "expMeanInterval": 1,
+        "minInterval": "5",
+        "maxInterval": "10",
+        "gaussMeanInterval": 1,
+        "stdDev": 1,
+        "outputTopic": "medicion",
+        "outputPayload": "",
+        "outputPayloadType": "date",
+        "maxEventCount": 0,
+        "x": 1620,
+        "y": 680,
+        "wires": [
+            [
+                "306cfdf98f4f2923"
+            ]
+        ]
+    },
+    {
+        "id": "45af8d8d78376af5",
+        "type": "event",
+        "z": "131009e1bd1f3ca1",
+        "name": "Foco 1",
+        "controlTopic": "control",
+        "startCmd": "lab2.foco1.start",
+        "stopCmd": "lab2.foco1.stop",
+        "distribution": "uniform",
+        "expMeanInterval": 1,
+        "minInterval": "5",
+        "maxInterval": "10",
+        "gaussMeanInterval": 1,
+        "stdDev": 1,
+        "outputTopic": "event",
+        "outputPayload": "",
+        "outputPayloadType": "date",
+        "maxEventCount": 0,
+        "x": 1590,
+        "y": 780,
+        "wires": [
+            [
+                "4c66e8c0f67cd74c"
+            ]
+        ]
+    },
+    {
+        "id": "b33e0ee329628ee0",
+        "type": "event",
+        "z": "131009e1bd1f3ca1",
+        "name": "Foco 2",
+        "controlTopic": "control",
+        "startCmd": "lab2.foco2.start",
+        "stopCmd": "lab2.foco2.stop",
+        "distribution": "uniform",
+        "expMeanInterval": 1,
+        "minInterval": "5",
+        "maxInterval": "10",
+        "gaussMeanInterval": 1,
+        "stdDev": 1,
+        "outputTopic": "event",
+        "outputPayload": "",
+        "outputPayloadType": "date",
+        "maxEventCount": 0,
+        "x": 1590,
+        "y": 880,
+        "wires": [
+            [
+                "b0f8775b9e2bd50b"
+            ]
+        ]
+    },
+    {
+        "id": "09d779b320684af0",
+        "type": "event",
+        "z": "131009e1bd1f3ca1",
+        "name": "Ventilador",
+        "controlTopic": "control",
+        "startCmd": "lab2.ventilador.start",
+        "stopCmd": "lab2.ventilador.stop",
+        "distribution": "uniform",
+        "expMeanInterval": 1,
+        "minInterval": "5",
+        "maxInterval": "10",
+        "gaussMeanInterval": 1,
+        "stdDev": 1,
+        "outputTopic": "event",
+        "outputPayload": "",
+        "outputPayloadType": "date",
+        "maxEventCount": 0,
+        "x": 1600,
+        "y": 980,
+        "wires": [
+            [
+                "9e285d46b4e4bf92"
+            ]
+        ]
+    },
+    {
+        "id": "4c66e8c0f67cd74c",
+        "type": "random",
+        "z": "131009e1bd1f3ca1",
+        "name": "Foco 1",
+        "low": 1,
+        "high": 10,
+        "inte": "true",
+        "property": "payload",
+        "x": 1750,
+        "y": 780,
+        "wires": [
+            [
+                "65a1c20518dacb8b"
+            ]
+        ]
+    },
+    {
+        "id": "b0f8775b9e2bd50b",
+        "type": "random",
+        "z": "131009e1bd1f3ca1",
+        "name": "Foco 2",
+        "low": 1,
+        "high": 10,
+        "inte": "true",
+        "property": "payload",
+        "x": 1750,
+        "y": 880,
+        "wires": [
+            [
+                "65a1c20518dacb8b"
+            ]
+        ]
+    },
+    {
+        "id": "9e285d46b4e4bf92",
+        "type": "random",
+        "z": "131009e1bd1f3ca1",
+        "name": "Ventilador",
+        "low": 1,
+        "high": "50",
+        "inte": "true",
+        "property": "payload",
+        "x": 1760,
+        "y": 980,
+        "wires": [
+            [
+                "65a1c20518dacb8b"
+            ]
+        ]
+    },
+    {
+        "id": "306cfdf98f4f2923",
+        "type": "function",
+        "z": "131009e1bd1f3ca1",
+        "name": "Computadoras",
+        "func": "let mensaje = msg.payload;\nlet today = new Date();\nlet diffMin = 0;\nlet diffTime = 0;\nif (!context.get(\"ultimoReset\")) {\n    context.set(\"ultimoReset\", today);\n   \n} else {\n    diffTime = Math.abs(today.getTime() - context.get(\"ultimoReset\").getTime());\n    diffMin = Math.ceil(diffTime / (1000 * 60)); \n    if (diffMin >= 60) {\n        msg['payload'] = 'stop';\n        node.send(msg);\n        context.set(\"ultimoReset\", today);\n    } else {\n        if (today.getHours() != context.get(\"ultimo\").getHours()) {\n            msg['payload'] = 'stop';\n            node.send(msg);\n            context.set(\"ultimoReset\", today);\n        }\n    }\n}\ncontext.set(\"ultimo\", today);\n\nif (flow.get('lab2.estado') == 'Encendido') {\n    context.set('computadorasActivas', getRandomInt(context.get('computadorasTotales')));\n    msg['activas'] = context.get('computadorasActivas');\n    msg['payload'] = context.get('computadorasActivas') * getRandomInt(200) * 5;\n    node.send(msg);\n    node.status({ fill: 'green', shape: 'ring', text: 'Computadoras activas=' + context.get('computadorasActivas') });\n} else {\n    context.set('computadorasActivas', 0);\n    msg['activas'] = context.get('computadorasActivas');\n    //msg['payload'] = 'stop';\n    node.send(msg);\n    node.status({ fill: 'red', shape: 'ring', text: 'Apagado' });\n}\n\nfunction getRandomInt(max) {\n    return Math.floor(Math.random() * max);\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('computadorasActivas', 2);\ncontext.set('computadorasTotales', 15);\ncontext.set('estado', 'Apagado');",
+        "finalize": "// Code added here will be run when the\n// node is being stopped or re-deployed.\ncontext.set('computadorasActivas', 0);",
+        "libs": [],
+        "x": 1860,
+        "y": 680,
+        "wires": [
+            [
+                "65a1c20518dacb8b",
+                "2f530d72b938a49f"
+            ]
+        ]
+    },
+    {
+        "id": "7dc6eefa6613d202",
+        "type": "switch",
+        "z": "131009e1bd1f3ca1",
+        "name": "Switch de control",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "lab2.st",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "lab2.foco1",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "lab2.foco2",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "lab2.ventilador",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 4,
+        "x": 430,
+        "y": 880,
+        "wires": [
+            [
+                "81be9258a5cd4341"
+            ],
+            [
+                "0e94d7f0c9448aeb"
+            ],
+            [
+                "615b2ee8a559e6d0"
+            ],
+            [
+                "bc6c8230c74106c1"
+            ]
+        ]
+    },
+    {
+        "id": "0e94d7f0c9448aeb",
+        "type": "ui_switch",
+        "z": "131009e1bd1f3ca1",
+        "name": "Foco 1",
+        "label": "Foco 1",
+        "tooltip": "",
+        "group": "97dc03174c7316bc",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "control",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "lab2.foco1.start",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "lab2.foco1.stop",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 1110,
+        "y": 760,
+        "wires": [
+            [
+                "22fb3927fbaed7ad"
+            ]
+        ]
+    },
+    {
+        "id": "b34d22447dbb7574",
+        "type": "ui_led",
+        "z": "131009e1bd1f3ca1",
+        "order": 4,
+        "group": "97dc03174c7316bc",
+        "width": 0,
+        "height": 0,
+        "label": "Foco 1",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "lab2.foco1.stop",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "lab2.foco1.start",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "Foco 1",
+        "x": 1590,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "615b2ee8a559e6d0",
+        "type": "ui_switch",
+        "z": "131009e1bd1f3ca1",
+        "name": "Foco 2",
+        "label": "Foco 2",
+        "tooltip": "",
+        "group": "97dc03174c7316bc",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "control",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "lab2.foco2.start",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "lab2.foco2.stop",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 1110,
+        "y": 840,
+        "wires": [
+            [
+                "6f90531a1215f367"
+            ]
+        ]
+    },
+    {
+        "id": "bc6c8230c74106c1",
+        "type": "ui_switch",
+        "z": "131009e1bd1f3ca1",
+        "name": "Ventilador",
+        "label": "Ventilador",
+        "tooltip": "",
+        "group": "97dc03174c7316bc",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "control",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "lab2.ventilador.start",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "lab2.ventilador.stop",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 1120,
+        "y": 940,
+        "wires": [
+            [
+                "d4adf01bef295216"
+            ]
+        ]
+    },
+    {
+        "id": "2f4dffee34bb9838",
+        "type": "ui_led",
+        "z": "131009e1bd1f3ca1",
+        "order": 6,
+        "group": "97dc03174c7316bc",
+        "width": 0,
+        "height": 0,
+        "label": "Foco 2",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "lab2.foco2.stop",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "lab2.foco2.start",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "Foco 2",
+        "x": 1590,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "02b49843ffbe7f46",
+        "type": "ui_led",
+        "z": "131009e1bd1f3ca1",
+        "order": 8,
+        "group": "97dc03174c7316bc",
+        "width": 0,
+        "height": 0,
+        "label": "Ventilador",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "lab2.ventilador.stop",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "lab2.ventilador.start",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "Ventilador",
+        "x": 1600,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "2f530d72b938a49f",
+        "type": "ui_gauge",
+        "z": "131009e1bd1f3ca1",
+        "name": "Computadoras activas",
+        "group": "97dc03174c7316bc",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Computadoras activas",
+        "label": "Computadoras",
+        "format": "{{msg.activas}}",
+        "min": 0,
+        "max": "15",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 2120,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "2b2b79d193540dc4",
+        "type": "change",
+        "z": "131009e1bd1f3ca1",
+        "name": "Encender",
+        "rules": [
+            {
+                "t": "set",
+                "p": "lab2.estado",
+                "pt": "flow",
+                "to": "Encendido",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 740,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "22fb3927fbaed7ad",
+        "type": "function",
+        "z": "131009e1bd1f3ca1",
+        "name": "Comprobación",
+        "func": "if (flow.get('lab2.estado') == 'Encendido' || msg.payload.includes('stop')) {\n    node.send(msg);\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1320,
+        "y": 760,
+        "wires": [
+            [
+                "b34d22447dbb7574",
+                "45af8d8d78376af5",
+                "1b5042b9fd176fe6"
+            ]
+        ]
+    },
+    {
+        "id": "133c647f083e81d0",
+        "type": "switch",
+        "z": "131009e1bd1f3ca1",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "lab2.start",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "lab2.stop",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 550,
+        "y": 660,
+        "wires": [
+            [
+                "2b2b79d193540dc4"
+            ],
+            [
+                "db0b32a0824d37c3",
+                "306cfdf98f4f2923"
+            ]
+        ]
+    },
+    {
+        "id": "db0b32a0824d37c3",
+        "type": "change",
+        "z": "131009e1bd1f3ca1",
+        "name": "Apagar",
+        "rules": [
+            {
+                "t": "set",
+                "p": "lab2.estado",
+                "pt": "flow",
+                "to": "Apagado",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 740,
+        "y": 680,
+        "wires": [
+            [
+                "e001ce6f05e7f3dd",
+                "9e642c3eb67a79a2",
+                "11568961a0588e89"
+            ]
+        ]
+    },
+    {
+        "id": "6f90531a1215f367",
+        "type": "function",
+        "z": "131009e1bd1f3ca1",
+        "name": "Comprobación",
+        "func": "if (flow.get('lab2.estado') == 'Encendido' || msg.payload.includes('stop')) {\n    node.send(msg);\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1320,
+        "y": 840,
+        "wires": [
+            [
+                "2f4dffee34bb9838",
+                "b33e0ee329628ee0",
+                "1b5042b9fd176fe6"
+            ]
+        ]
+    },
+    {
+        "id": "d4adf01bef295216",
+        "type": "function",
+        "z": "131009e1bd1f3ca1",
+        "name": "Comprobación",
+        "func": "if (flow.get('lab2.estado') == 'Encendido' || msg.payload.includes('stop')) {\n    node.send(msg);\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1320,
+        "y": 940,
+        "wires": [
+            [
+                "02b49843ffbe7f46",
+                "09d779b320684af0",
+                "1b5042b9fd176fe6"
+            ]
+        ]
+    },
+    {
+        "id": "1b5042b9fd176fe6",
+        "type": "mqtt out",
+        "z": "131009e1bd1f3ca1",
+        "name": "",
+        "topic": "lab.control",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b9d0191559070694",
+        "x": 1610,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "e001ce6f05e7f3dd",
+        "type": "change",
+        "z": "131009e1bd1f3ca1",
+        "name": "Apagar foco 1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "lab2.foco1.stop",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 940,
+        "y": 740,
+        "wires": [
+            [
+                "0e94d7f0c9448aeb"
+            ]
+        ]
+    },
+    {
+        "id": "9e642c3eb67a79a2",
+        "type": "change",
+        "z": "131009e1bd1f3ca1",
+        "name": "Apagar foco 2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "lab2.foco2.stop",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 940,
+        "y": 820,
+        "wires": [
+            [
+                "615b2ee8a559e6d0"
+            ]
+        ]
+    },
+    {
+        "id": "11568961a0588e89",
+        "type": "change",
+        "z": "131009e1bd1f3ca1",
+        "name": "Apagar ventilador",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "lab2.ventilador.stop",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 950,
+        "y": 900,
+        "wires": [
+            [
+                "bc6c8230c74106c1"
+            ]
+        ]
+    },
+    {
+        "id": "a3fa4151b915d199",
+        "type": "ui_led",
+        "z": "131009e1bd1f3ca1",
+        "order": 2,
+        "group": "e0db0d856a819465",
+        "width": 0,
+        "height": 0,
+        "label": "Medidor principal",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "lab4.stop",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "lab4.start",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "Medidor principal",
+        "x": 1610,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "722e09d4eefd5c15",
+        "type": "ui_switch",
+        "z": "131009e1bd1f3ca1",
+        "name": "Switch principal",
+        "label": "Medidor principal",
+        "tooltip": "Encender/apagar",
+        "group": "e0db0d856a819465",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "control",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "lab4.start",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "lab4.stop",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 480,
+        "y": 1080,
+        "wires": [
+            [
+                "aa89f7efad4429b0",
+                "a3fa4151b915d199",
+                "cf853bb60a9abbec",
+                "0f70dc428f43ed1b"
+            ]
+        ]
+    },
+    {
+        "id": "0d19f47a9199f201",
+        "type": "power-monitor",
+        "z": "131009e1bd1f3ca1",
+        "name": "Medidor principal",
+        "startthreshold": 0,
+        "stopthreshold": "-1",
+        "startafter": 1,
+        "stopafter": 1,
+        "energydecimals": 4,
+        "emitidle": false,
+        "x": 2010,
+        "y": 1340,
+        "wires": [
+            [
+                "e7f25e5e5f1c2cee"
+            ]
+        ]
+    },
+    {
+        "id": "cf853bb60a9abbec",
+        "type": "event",
+        "z": "131009e1bd1f3ca1",
+        "name": "Computadoras",
+        "controlTopic": "control",
+        "startCmd": "lab4.start",
+        "stopCmd": "lab4.stop",
+        "distribution": "uniform",
+        "expMeanInterval": 1,
+        "minInterval": "5",
+        "maxInterval": "10",
+        "gaussMeanInterval": 1,
+        "stdDev": 1,
+        "outputTopic": "medicion",
+        "outputPayload": "",
+        "outputPayloadType": "date",
+        "maxEventCount": 0,
+        "x": 1600,
+        "y": 1200,
+        "wires": [
+            [
+                "88d113db59fe33fb"
+            ]
+        ]
+    },
+    {
+        "id": "13f26dc55cb2f859",
+        "type": "event",
+        "z": "131009e1bd1f3ca1",
+        "name": "Foco 1",
+        "controlTopic": "control",
+        "startCmd": "lab4.foco1.start",
+        "stopCmd": "lab4.foco1.stop",
+        "distribution": "uniform",
+        "expMeanInterval": 1,
+        "minInterval": "5",
+        "maxInterval": "10",
+        "gaussMeanInterval": 1,
+        "stdDev": 1,
+        "outputTopic": "event",
+        "outputPayload": "",
+        "outputPayloadType": "date",
+        "maxEventCount": 0,
+        "x": 1570,
+        "y": 1300,
+        "wires": [
+            [
+                "d11e52d718f46218"
+            ]
+        ]
+    },
+    {
+        "id": "6b3ad9a6d5fcbe4e",
+        "type": "event",
+        "z": "131009e1bd1f3ca1",
+        "name": "Foco 2",
+        "controlTopic": "control",
+        "startCmd": "lab4.foco2.start",
+        "stopCmd": "lab4.foco2.stop",
+        "distribution": "uniform",
+        "expMeanInterval": 1,
+        "minInterval": "5",
+        "maxInterval": "10",
+        "gaussMeanInterval": 1,
+        "stdDev": 1,
+        "outputTopic": "event",
+        "outputPayload": "",
+        "outputPayloadType": "date",
+        "maxEventCount": 0,
+        "x": 1570,
+        "y": 1400,
+        "wires": [
+            [
+                "88a6e5f3a892c765"
+            ]
+        ]
+    },
+    {
+        "id": "75e6703805c07e61",
+        "type": "event",
+        "z": "131009e1bd1f3ca1",
+        "name": "Ventilador",
+        "controlTopic": "control",
+        "startCmd": "lab4.ventilador.start",
+        "stopCmd": "lab4.ventilador.stop",
+        "distribution": "uniform",
+        "expMeanInterval": 1,
+        "minInterval": "5",
+        "maxInterval": "10",
+        "gaussMeanInterval": 1,
+        "stdDev": 1,
+        "outputTopic": "event",
+        "outputPayload": "",
+        "outputPayloadType": "date",
+        "maxEventCount": 0,
+        "x": 1580,
+        "y": 1500,
+        "wires": [
+            [
+                "b15141e0b7294eee"
+            ]
+        ]
+    },
+    {
+        "id": "d11e52d718f46218",
+        "type": "random",
+        "z": "131009e1bd1f3ca1",
+        "name": "Foco 1",
+        "low": 1,
+        "high": 10,
+        "inte": "true",
+        "property": "payload",
+        "x": 1730,
+        "y": 1300,
+        "wires": [
+            [
+                "0d19f47a9199f201"
+            ]
+        ]
+    },
+    {
+        "id": "88a6e5f3a892c765",
+        "type": "random",
+        "z": "131009e1bd1f3ca1",
+        "name": "Foco 2",
+        "low": 1,
+        "high": 10,
+        "inte": "true",
+        "property": "payload",
+        "x": 1730,
+        "y": 1400,
+        "wires": [
+            [
+                "0d19f47a9199f201"
+            ]
+        ]
+    },
+    {
+        "id": "b15141e0b7294eee",
+        "type": "random",
+        "z": "131009e1bd1f3ca1",
+        "name": "Ventilador",
+        "low": 1,
+        "high": "50",
+        "inte": "true",
+        "property": "payload",
+        "x": 1740,
+        "y": 1500,
+        "wires": [
+            [
+                "0d19f47a9199f201"
+            ]
+        ]
+    },
+    {
+        "id": "88d113db59fe33fb",
+        "type": "function",
+        "z": "131009e1bd1f3ca1",
+        "name": "Computadoras",
+        "func": "let mensaje = msg.payload;\nlet today = new Date();\nlet diffMin = 0;\nlet diffTime = 0;\nif (!context.get(\"ultimoReset\")) {\n    context.set(\"ultimoReset\", today);\n\n} else {\n    diffTime = Math.abs(today.getTime() - context.get(\"ultimoReset\").getTime());\n    diffMin = Math.ceil(diffTime / (1000 * 60));\n    if (diffMin >= 60) {\n        msg['payload'] = 'stop';\n        node.send(msg);\n        context.set(\"ultimoReset\", today);\n    } else {\n        if (today.getHours() != context.get(\"ultimo\").getHours()) {\n            msg['payload'] = 'stop';\n            node.send(msg);\n            context.set(\"ultimoReset\", today);\n        }\n    }\n}\ncontext.set(\"ultimo\", today);\n\nif (flow.get('lab4.estado') == 'Encendido') {\n    context.set('computadorasActivas', getRandomInt(context.get('computadorasTotales')));\n    msg['activas'] = context.get('computadorasActivas');\n    msg['payload'] = context.get('computadorasActivas') * getRandomInt(200) * 5;\n    node.send(msg);\n    node.status({ fill: 'green', shape: 'ring', text: 'Computadoras activas=' + context.get('computadorasActivas') });\n} else {\n    context.set('computadorasActivas', 0);\n    msg['activas'] = context.get('computadorasActivas');\n    //msg['payload'] = 'stop';\n    node.send(msg);\n    node.status({ fill: 'red', shape: 'ring', text: 'Apagado' });\n}\n\nfunction getRandomInt(max) {\n    return Math.floor(Math.random() * max);\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('computadorasActivas', 2);\ncontext.set('computadorasTotales', 20);\ncontext.set('estado', 'Apagado');",
+        "finalize": "// Code added here will be run when the\n// node is being stopped or re-deployed.\ncontext.set('computadorasActivas', 0);",
+        "libs": [],
+        "x": 1840,
+        "y": 1200,
+        "wires": [
+            [
+                "0d19f47a9199f201",
+                "ab9fabdca432cf6e"
+            ]
+        ]
+    },
+    {
+        "id": "f3132bdaa9ef3ec0",
+        "type": "switch",
+        "z": "131009e1bd1f3ca1",
+        "name": "Switch de control",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "lab4.st",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "lab4.foco1",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "lab4.foco2",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "lab4.ventilador",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 4,
+        "x": 410,
+        "y": 1400,
+        "wires": [
+            [
+                "722e09d4eefd5c15"
+            ],
+            [
+                "54cdd0bcd15987e5"
+            ],
+            [
+                "0cd49399fec89a81"
+            ],
+            [
+                "a860a1636d82b5d9"
+            ]
+        ]
+    },
+    {
+        "id": "54cdd0bcd15987e5",
+        "type": "ui_switch",
+        "z": "131009e1bd1f3ca1",
+        "name": "Foco 1",
+        "label": "Foco 1",
+        "tooltip": "",
+        "group": "e0db0d856a819465",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "control",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "lab4.foco1.start",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "lab4.foco1.stop",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 1090,
+        "y": 1280,
+        "wires": [
+            [
+                "fe9043d5feb36d7e"
+            ]
+        ]
+    },
+    {
+        "id": "89627893298e9d41",
+        "type": "ui_led",
+        "z": "131009e1bd1f3ca1",
+        "order": 4,
+        "group": "e0db0d856a819465",
+        "width": 0,
+        "height": 0,
+        "label": "Foco 1",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "lab4.foco1.stop",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "lab4.foco1.start",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "Foco 1",
+        "x": 1570,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "0cd49399fec89a81",
+        "type": "ui_switch",
+        "z": "131009e1bd1f3ca1",
+        "name": "Foco 2",
+        "label": "Foco 2",
+        "tooltip": "",
+        "group": "e0db0d856a819465",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "control",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "lab4.foco2.start",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "lab4.foco2.stop",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 1090,
+        "y": 1360,
+        "wires": [
+            [
+                "f6821e164eaf9e93"
+            ]
+        ]
+    },
+    {
+        "id": "a860a1636d82b5d9",
+        "type": "ui_switch",
+        "z": "131009e1bd1f3ca1",
+        "name": "Ventilador",
+        "label": "Ventilador",
+        "tooltip": "",
+        "group": "e0db0d856a819465",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "control",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "lab4.ventilador.start",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "lab4.ventilador.stop",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 1100,
+        "y": 1460,
+        "wires": [
+            [
+                "30c4fba2cc57f268"
+            ]
+        ]
+    },
+    {
+        "id": "1ab9442c75d6d5d2",
+        "type": "ui_led",
+        "z": "131009e1bd1f3ca1",
+        "order": 6,
+        "group": "e0db0d856a819465",
+        "width": 0,
+        "height": 0,
+        "label": "Foco 2",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "lab4.foco2.stop",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "lab4.foco2.start",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "Foco 2",
+        "x": 1570,
+        "y": 1360,
+        "wires": []
+    },
+    {
+        "id": "f59f18ff35560b0a",
+        "type": "ui_led",
+        "z": "131009e1bd1f3ca1",
+        "order": 8,
+        "group": "e0db0d856a819465",
+        "width": 0,
+        "height": 0,
+        "label": "Ventilador",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "lab4.ventilador.stop",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "lab4.ventilador.start",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "Ventilador",
+        "x": 1580,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "ab9fabdca432cf6e",
+        "type": "ui_gauge",
+        "z": "131009e1bd1f3ca1",
+        "name": "Computadoras activas",
+        "group": "e0db0d856a819465",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Computadoras activas",
+        "label": "Computadoras",
+        "format": "{{msg.activas}}",
+        "min": 0,
+        "max": "20",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 2100,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "4cf99c833580e97b",
+        "type": "change",
+        "z": "131009e1bd1f3ca1",
+        "name": "Encender",
+        "rules": [
+            {
+                "t": "set",
+                "p": "lab4.estado",
+                "pt": "flow",
+                "to": "Encendido",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 720,
+        "y": 1160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fe9043d5feb36d7e",
+        "type": "function",
+        "z": "131009e1bd1f3ca1",
+        "name": "Comprobación",
+        "func": "if (flow.get('lab4.estado') == 'Encendido' || msg.payload.includes('stop')) {\n    node.send(msg);\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1300,
+        "y": 1280,
+        "wires": [
+            [
+                "89627893298e9d41",
+                "13f26dc55cb2f859",
+                "0f70dc428f43ed1b"
+            ]
+        ]
+    },
+    {
+        "id": "aa89f7efad4429b0",
+        "type": "switch",
+        "z": "131009e1bd1f3ca1",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "lab4.start",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "lab4.stop",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 530,
+        "y": 1180,
+        "wires": [
+            [
+                "4cf99c833580e97b"
+            ],
+            [
+                "d4cf20769489a7a4",
+                "88d113db59fe33fb"
+            ]
+        ]
+    },
+    {
+        "id": "d4cf20769489a7a4",
+        "type": "change",
+        "z": "131009e1bd1f3ca1",
+        "name": "Apagar",
+        "rules": [
+            {
+                "t": "set",
+                "p": "lab4.estado",
+                "pt": "flow",
+                "to": "Apagado",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 720,
+        "y": 1200,
+        "wires": [
+            [
+                "a6c675723019a595",
+                "d9f03cf8df7f9478",
+                "a9ee88c9588046a8"
+            ]
+        ]
+    },
+    {
+        "id": "f6821e164eaf9e93",
+        "type": "function",
+        "z": "131009e1bd1f3ca1",
+        "name": "Comprobación",
+        "func": "if (flow.get('lab4.estado') == 'Encendido' || msg.payload.includes('stop')) {\n    node.send(msg);\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1300,
+        "y": 1360,
+        "wires": [
+            [
+                "1ab9442c75d6d5d2",
+                "6b3ad9a6d5fcbe4e",
+                "0f70dc428f43ed1b"
+            ]
+        ]
+    },
+    {
+        "id": "30c4fba2cc57f268",
+        "type": "function",
+        "z": "131009e1bd1f3ca1",
+        "name": "Comprobación",
+        "func": "if (flow.get('lab4.estado') == 'Encendido' || msg.payload.includes('stop')) {\n    node.send(msg);\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1300,
+        "y": 1460,
+        "wires": [
+            [
+                "f59f18ff35560b0a",
+                "75e6703805c07e61",
+                "0f70dc428f43ed1b"
+            ]
+        ]
+    },
+    {
+        "id": "0f70dc428f43ed1b",
+        "type": "mqtt out",
+        "z": "131009e1bd1f3ca1",
+        "name": "",
+        "topic": "lab.control",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b9d0191559070694",
+        "x": 1590,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "a6c675723019a595",
+        "type": "change",
+        "z": "131009e1bd1f3ca1",
+        "name": "Apagar foco 1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "lab4.foco1.stop",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 920,
+        "y": 1260,
+        "wires": [
+            [
+                "54cdd0bcd15987e5"
+            ]
+        ]
+    },
+    {
+        "id": "d9f03cf8df7f9478",
+        "type": "change",
+        "z": "131009e1bd1f3ca1",
+        "name": "Apagar foco 2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "lab4.foco2.stop",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 920,
+        "y": 1340,
+        "wires": [
+            [
+                "0cd49399fec89a81"
+            ]
+        ]
+    },
+    {
+        "id": "a9ee88c9588046a8",
+        "type": "change",
+        "z": "131009e1bd1f3ca1",
+        "name": "Apagar ventilador",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "lab4.ventilador.stop",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 930,
+        "y": 1420,
+        "wires": [
+            [
+                "a860a1636d82b5d9"
+            ]
+        ]
+    },
+    {
+        "id": "548c34ddc5dcc85e",
+        "type": "ui_text",
+        "z": "131009e1bd1f3ca1",
+        "group": "a25abce14e56bfbb",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "text",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 210,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "a25abce14e56bfbb",
+        "type": "ui_group",
+        "name": "Laboratorio 1",
+        "tab": "171057bf4bfb777c",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "5f72618dfadbe864",
+        "type": "mqtt-broker",
+        "name": "LAB 1",
+        "broker": "127.0.0.1",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "b9d0191559070694",
+        "type": "mqtt-broker",
+        "name": "LAB 2",
+        "broker": "127.0.0.1",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "8ff3fbfa8bb84081",
+        "type": "mqtt-broker",
+        "name": "LAB 4",
+        "broker": "127.0.0.1",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "97dc03174c7316bc",
+        "type": "ui_group",
+        "name": "Laboratorio 2",
+        "tab": "171057bf4bfb777c",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "e0db0d856a819465",
+        "type": "ui_group",
+        "name": "Laboratorio 4",
+        "tab": "171057bf4bfb777c",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "171057bf4bfb777c",
+        "type": "ui_tab",
+        "name": "Principal",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
